@@ -5,7 +5,7 @@ import {
   getMiIOT,
   getMiNA,
 } from "mi-service-lite";
-import { clamp, sleep } from "../../utils/base";
+import { clamp, removeThinkTags, sleep } from "../../utils/base";
 import { jsonEncode } from "../../utils/parse";
 import { Logger } from "../../utils/log";
 import { StreamResponse } from "./stream";
@@ -307,7 +307,7 @@ export class BaseSpeaker {
 
     const hasNewMsg = () => options.hasNewMsg?.();
 
-    const ttsText = text?.replace(/\n\s*\n/g, "\n")?.trim();
+    const ttsText = removeThinkTags(text?.replace(/\n\s*\n/g, "\n")?.trim());
     const ttsNotXiaoai = tts !== "xiaoai" && !audio;
     playSFX = this.streamResponse && ttsNotXiaoai && playSFX;
 

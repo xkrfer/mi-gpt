@@ -1,5 +1,5 @@
 import { isEmpty } from "./is";
-import { jsonEncode } from "./parse"
+import { jsonEncode } from "./parse";
 
 export function timestamp() {
   return new Date().getTime();
@@ -130,4 +130,12 @@ export const deepClone = <T>(obj: T): T => {
 
 export function repeat(text: string, count: number) {
   return Array(count).fill(text).join("");
+}
+
+export function removeThinkTags(text?: string) {
+  if (!text) {
+    return text;
+  }
+  const regex = /<think>.*?<\/think>/gs;
+  return text.replace(regex, "").trim();
 }
